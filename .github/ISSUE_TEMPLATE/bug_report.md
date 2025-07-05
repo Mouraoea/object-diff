@@ -34,7 +34,7 @@ A clear and concise description of what actually happened.
 
 - OS: [e.g. Windows 10, macOS 12.0, Ubuntu 20.04]
 - Node.js version: [e.g. 16.15.0]
-- object-diff version: [e.g. 1.0.0]
+- object-diff-ts version: [e.g. 1.0.0]
 
 **Additional context**
 Add any other context about the problem here, such as:

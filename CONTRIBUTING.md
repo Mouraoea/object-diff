@@ -1,6 +1,6 @@
-# Contributing to object-diff
+# Contributing to object-diff-ts
 
-Thank you for your interest in contributing to object-diff! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to object-diff-ts! This document provides guidelines and information for contributors.
 
 ## Development Setup
 
@@ -13,8 +13,8 @@ Thank you for your interest in contributing to object-diff! This document provid
 
 ```bash
 # Clone the repository
-git clone https://github.com/Mouraoea/object-diff.git
-cd object-diff
+git clone https://github.com/Mouraoea/object-diff-ts.git
+cd object-diff-ts
 
 # Install dependencies
 npm install

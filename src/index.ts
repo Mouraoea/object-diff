@@ -1,5 +1,5 @@
 /**
- * object-diff - A high-performance object diffing library for MongoDB-like objects
+ * object-diff-ts - A high-performance object diffing library for MongoDB-like objects
  * 
  * This library compares two objects and returns:
  * - additions: properties that exist in object B but not in object A

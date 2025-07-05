@@ -1,7 +1,7 @@
-# object-diff
+# object-diff-ts
 
-[![CI](https://github.com/Mouraoea/object-diff/workflows/CI/badge.svg)](https://github.com/Mouraoea/object-diff/actions)
-[![npm version](https://badge.fury.io/js/object-diff.svg)](https://badge.fury.io/js/object-diff)
+[![CI](https://github.com/Mouraoea/object-diff-ts/workflows/CI/badge.svg)](https://github.com/Mouraoea/object-diff-ts/actions)
+[![npm version](https://badge.fury.io/js/object-diff-ts.svg)](https://badge.fury.io/js/object-diff-ts)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
 
@@ -20,13 +20,13 @@ A high-performance object diffing library for MongoDB-like objects. This library
 ## Installation
 
 ```bash
-npm install XXX [WIP]
+npm install object-diff-ts
 ```
 
 ## Quick Start
 
 ```typescript
-import { diff } from 'object-diff';
+import { diff } from 'object-diff-ts';
 
 const objectA = {
   name: 'John',
@@ -105,7 +105,7 @@ interface DiffResult {
 ### Basic Comparison
 
 ```typescript
-import { diff } from 'object-diff';
+import { diff } from 'object-diff-ts';
 
 const result = diff(
   { name: 'John', age: 30 },
