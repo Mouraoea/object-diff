@@ -8,9 +8,12 @@
  * @param valueB Second value
  * @returns Object with coerced values and whether they are equal
  */
-export function coerceValues(valueA: any, valueB: any): {
-  coercedA: any;
-  coercedB: any;
+export function coerceValues(
+  valueA: unknown,
+  valueB: unknown
+): {
+  coercedA: unknown;
+  coercedB: unknown;
   areEqual: boolean;
 } {
   // If both values are null or undefined, they're equal
@@ -47,14 +50,22 @@ export function coerceValues(valueA: any, valueB: any): {
   if (typeof valueA === 'boolean' && typeof valueB === 'string') {
     const coercedB = valueB.toLowerCase();
     if (coercedB === 'true' || coercedB === 'false') {
-      return { coercedA: valueA, coercedB: coercedB === 'true', areEqual: valueA === (coercedB === 'true') };
+      return {
+        coercedA: valueA,
+        coercedB: coercedB === 'true',
+        areEqual: valueA === (coercedB === 'true'),
+      };
     }
   }
 
   if (typeof valueA === 'string' && typeof valueB === 'boolean') {
     const coercedA = valueA.toLowerCase();
     if (coercedA === 'true' || coercedA === 'false') {
-      return { coercedA: coercedA === 'true', coercedB: valueB, areEqual: (coercedA === 'true') === valueB };
+      return {
+        coercedA: coercedA === 'true',
+        coercedB: valueB,
+        areEqual: (coercedA === 'true') === valueB,
+      };
     }
   }
 
@@ -62,24 +73,40 @@ export function coerceValues(valueA: any, valueB: any): {
   if (valueA instanceof Date && typeof valueB === 'string') {
     const coercedB = new Date(valueB);
     if (!isNaN(coercedB.getTime())) {
-      return { coercedA: valueA, coercedB, areEqual: valueA.getTime() === coercedB.getTime() };
+      return {
+        coercedA: valueA,
+        coercedB,
+        areEqual: valueA.getTime() === coercedB.getTime(),
+      };
     }
   }
 
   if (typeof valueA === 'string' && valueB instanceof Date) {
     const coercedA = new Date(valueA);
     if (!isNaN(coercedA.getTime())) {
-      return { coercedA: coercedA, coercedB: valueB, areEqual: coercedA.getTime() === valueB.getTime() };
+      return {
+        coercedA: coercedA,
+        coercedB: valueB,
+        areEqual: coercedA.getTime() === valueB.getTime(),
+      };
     }
   }
 
   // Handle number vs boolean coercion
   if (typeof valueA === 'number' && typeof valueB === 'boolean') {
-    return { coercedA: valueA, coercedB: valueB ? 1 : 0, areEqual: valueA === (valueB ? 1 : 0) };
+    return {
+      coercedA: valueA,
+      coercedB: valueB ? 1 : 0,
+      areEqual: valueA === (valueB ? 1 : 0),
+    };
   }
 
   if (typeof valueA === 'boolean' && typeof valueB === 'number') {
-    return { coercedA: valueA ? 1 : 0, coercedB: valueB, areEqual: (valueA ? 1 : 0) === valueB };
+    return {
+      coercedA: valueA ? 1 : 0,
+      coercedB: valueB,
+      areEqual: (valueA ? 1 : 0) === valueB,
+    };
   }
 
   // If no coercion is possible, values are not equal
@@ -89,7 +116,7 @@ export function coerceValues(valueA: any, valueB: any): {
 /**
  * Checks if a value can be coerced to a number
  */
-export function canCoerceToNumber(value: any): boolean {
+export function canCoerceToNumber(value: unknown): boolean {
   if (typeof value === 'number') return true;
   if (typeof value === 'string') {
     const num = Number(value);
@@ -101,7 +128,7 @@ export function canCoerceToNumber(value: any): boolean {
 /**
  * Checks if a value can be coerced to a boolean
  */
-export function canCoerceToBoolean(value: any): boolean {
+export function canCoerceToBoolean(value: unknown): boolean {
   if (typeof value === 'boolean') return true;
   if (typeof value === 'string') {
     const lower = value.toLowerCase();
@@ -113,11 +140,11 @@ export function canCoerceToBoolean(value: any): boolean {
 /**
  * Checks if a value can be coerced to a Date
  */
-export function canCoerceToDate(value: any): boolean {
+export function canCoerceToDate(value: unknown): boolean {
   if (value instanceof Date) return true;
   if (typeof value === 'string') {
     const date = new Date(value);
     return !isNaN(date.getTime());
   }
   return false;
-} 
+}

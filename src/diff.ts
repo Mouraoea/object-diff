@@ -20,28 +20,32 @@ const DEFAULT_OPTIONS: Required<DiffOptions> = {
  * Internal diff function that handles the recursive comparison
  */
 function internalDiff(
-  objA: any,
-  objB: any,
+  objA: unknown,
+  objB: unknown,
   context: ComparisonContext
 ): DiffResult {
   const result: DiffResult = {
-    additions: {},
-    deletions: {},
-    updates: {},
+    additions: Object.fromEntries([]) as Record<string, unknown>,
+    deletions: Object.fromEntries([]) as Record<string, unknown>,
+    updates: Object.fromEntries([]) as Record<string, unknown>,
   };
 
   // Handle null/undefined cases
   if (objA == null && objB == null) {
-    return result;
+    return {
+      additions: Object.fromEntries([]) as Record<string, unknown>,
+      deletions: Object.fromEntries([]) as Record<string, unknown>,
+      updates: Object.fromEntries([]) as Record<string, unknown>,
+    };
   }
 
   if (objA == null) {
-    result.additions = objB;
+    result.additions = objB as Record<string, unknown>;
     return result;
   }
 
   if (objB == null) {
-    result.deletions = objA;
+    result.deletions = objA as Record<string, unknown>;
     return result;
   }
 
@@ -69,7 +73,11 @@ function internalDiff(
 
   // Handle plain objects
   if (isPlainObject(objA) && isPlainObject(objB)) {
-    return compareObjects(objA, objB, context);
+    return compareObjects(
+      objA as Record<string, unknown>,
+      objB as Record<string, unknown>,
+      context
+    );
   }
 
   // Handle primitives and other types
@@ -84,14 +92,14 @@ function internalDiff(
  * Compares two plain objects recursively
  */
 function compareObjects(
-  objA: Record<string, any>,
-  objB: Record<string, any>,
+  objA: Record<string, unknown>,
+  objB: Record<string, unknown>,
   context: ComparisonContext
 ): DiffResult {
   const result: DiffResult = {
-    additions: {},
-    deletions: {},
-    updates: {},
+    additions: Object.fromEntries([]) as Record<string, unknown>,
+    deletions: Object.fromEntries([]) as Record<string, unknown>,
+    updates: Object.fromEntries([]) as Record<string, unknown>,
   };
 
   const keysA = Object.keys(objA);
@@ -191,8 +199,8 @@ function compareObjects(
  * @returns Object containing additions, deletions, and updates
  */
 export function diff(
-  objectA: any,
-  objectB: any,
+  objectA: unknown,
+  objectB: unknown,
   options: DiffOptions = {}
 ): DiffResult {
   // Merge options with defaults

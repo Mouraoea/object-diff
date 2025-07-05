@@ -45,8 +45,8 @@ export function shouldIgnoreProperty(
  * Compares two primitive values with optional type coercion
  */
 export function comparePrimitives(
-  valueA: any,
-  valueB: any,
+  valueA: unknown,
+  valueB: unknown,
   enableTypeCoercion: boolean
 ): boolean {
   // Strict equality check first
@@ -68,8 +68,8 @@ export function comparePrimitives(
  * Compares two arrays with configurable order sensitivity
  */
 export function compareArrays(
-  arrayA: any[],
-  arrayB: any[],
+  arrayA: unknown[],
+  arrayB: unknown[],
   context: {
     depth: number;
     path: string[];
@@ -77,9 +77,27 @@ export function compareArrays(
       arrayOrderMatters: boolean;
       enableTypeCoercion: boolean;
       maxDepth: number;
+      ignoreProperties: string[];
     };
   },
-  internalDiff: (objA: any, objB: any, ctx: any) => any
+  internalDiff: (
+    objA: unknown,
+    objB: unknown,
+    context: {
+      depth: number;
+      path: string[];
+      options: {
+        arrayOrderMatters: boolean;
+        enableTypeCoercion: boolean;
+        maxDepth: number;
+        ignoreProperties: string[];
+      };
+    }
+  ) => {
+    additions: Record<string, unknown>;
+    deletions: Record<string, unknown>;
+    updates: Record<string, unknown>;
+  }
 ): boolean {
   // Different lengths
   if (arrayA.length !== arrayB.length) {
@@ -171,11 +189,11 @@ export function compareArrays(
  * Creates a nested object from a path array
  */
 export function setNestedValue(
-  obj: Record<string, any>,
+  obj: Record<string, unknown>,
   path: string[],
-  value: any
+  value: unknown
 ): void {
-  let current = obj;
+  let current = obj as Record<string, unknown>;
   for (let i = 0; i < path.length - 1; i++) {
     const key = path[i];
     if (
@@ -185,7 +203,7 @@ export function setNestedValue(
     ) {
       current[key] = {};
     }
-    current = current[key];
+    current = current[key] as Record<string, unknown>;
   }
   // If value is an object and the last key already exists and is an object, merge
   const lastKey = path[path.length - 1];
@@ -206,14 +224,17 @@ export function setNestedValue(
 /**
  * Gets a nested value from an object using a path array
  */
-export function getNestedValue(obj: Record<string, any>, path: string[]): any {
-  let current = obj;
+export function getNestedValue(
+  obj: Record<string, unknown>,
+  path: string[]
+): unknown {
+  let current: unknown = obj;
 
   for (const key of path) {
     if (current == null || typeof current !== 'object') {
       return undefined;
     }
-    current = current[key];
+    current = (current as Record<string, unknown>)[key];
   }
 
   return current;
@@ -222,7 +243,7 @@ export function getNestedValue(obj: Record<string, any>, path: string[]): any {
 /**
  * Checks if a value is a plain object (not null, not array, not Date, etc.)
  */
-export function isPlainObject(value: any): boolean {
+export function isPlainObject(value: unknown): boolean {
   return (
     value !== null &&
     typeof value === 'object' &&

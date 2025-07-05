@@ -1,5 +1,10 @@
 # object-diff
 
+[![CI](https://github.com/Mouraoea/object-diff/workflows/CI/badge.svg)](https://github.com/Mouraoea/object-diff/actions)
+[![npm version](https://badge.fury.io/js/object-diff.svg)](https://badge.fury.io/js/object-diff)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+
 A high-performance object diffing library for MongoDB-like objects. This library compares two objects and returns detailed information about additions, deletions, and updates.
 
 ## Features
