@@ -275,8 +275,8 @@ describe('db-diff', () => {
 
   describe('Performance considerations', () => {
     test('should handle large objects efficiently', () => {
-      const objA: Record<string, any> = {};
-      const objB: Record<string, any> = {};
+      const objA: Record<string, number> = {};
+      const objB: Record<string, number> = {};
 
       // Create objects with 50 properties
       for (let i = 0; i < 50; i++) {
@@ -296,8 +296,8 @@ describe('db-diff', () => {
     });
 
     test('should respect max depth limit', () => {
-      let objA: any = { value: 'deep' };
-      let objB: any = { value: 'deep' };
+      let objA: Record<string, unknown> = { value: 'deep' };
+      let objB: Record<string, unknown> = { value: 'deep' };
 
       // Create deeply nested objects
       for (let i = 0; i < 10; i++) {
