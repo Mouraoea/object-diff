@@ -20,7 +20,7 @@ A high-performance object diffing library for MongoDB-like objects. This library
 ## Installation
 
 ```bash
-npm install object-diff
+npm install XXX [WIP]
 ```
 
 ## Quick Start
