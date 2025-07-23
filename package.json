@@ -1,6 +1,6 @@
 {
   "name": "object-diff-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A high-performance object diffing library for MongoDB-like objects",
   "main": "dist/index.js",
   "type": "module",
